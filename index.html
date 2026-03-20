@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mad Dog Fitness AI</title>
+</head>
+<body style="font-family:sans-serif;text-align:center;margin-top:50px">
+
+<h1>🐺 Mad Dog Fitness AI</h1>
+
+<input id="goal" placeholder="fat_loss or muscle_gain"/>
+<br><br>
+
+<button onclick="getPlan()">Generate Plan</button>
+
+<div id="result"></div>
+
+<script>
+async function getPlan() {
+  const goal = document.getElementById("goal").value;
+
+  const res = await fetch("http://localhost:5000/generate-plan", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ goal })
+  });
+
+  const data = await res.json();
+
+  document.getElementById("result").innerHTML =
+    "<h3>Workout:</h3>" + data.workout.join(", ") +
+    "<h3>Meals:</h3>" + data.meals.join(", ");
+}
+</script>
+
+</body>
+</html>

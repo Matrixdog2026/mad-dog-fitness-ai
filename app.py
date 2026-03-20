@@ -12,8 +12,12 @@ def generate_plan():
 
     goal = data.get("goal", "muscle_gain")
 
-    workout = ["Bench Press", "Squats", "Deadlifts"]
-    meals = ["Chicken", "Rice", "Eggs"]
+    if goal == "fat_loss":
+        workout = ["HIIT", "Running", "Core"]
+        meals = ["Chicken", "Rice", "Broccoli"]
+    else:
+        workout = ["Bench Press", "Squats", "Deadlifts"]
+        meals = ["Steak", "Rice", "Eggs"]
 
     return jsonify({
         "goal": goal,
